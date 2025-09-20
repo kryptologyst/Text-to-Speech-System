@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  tts-app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./audio_outputs:/app/audio_outputs
+      - ./tts_database.db:/app/tts_database.db
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/voices"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Add a reverse proxy
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - tts-app
+    restart: unless-stopped

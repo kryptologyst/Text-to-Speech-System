@@ -1,0 +1,23 @@
+# Environment Configuration for Modern Text-to-Speech System
+
+# OpenAI API Configuration (Optional - for premium TTS)
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Azure Speech Services Configuration (Optional - for premium TTS)
+AZURE_SPEECH_KEY=your_azure_speech_key_here
+AZURE_SPEECH_REGION=your_azure_region_here
+
+# Database Configuration
+DATABASE_URL=sqlite:///./tts_database.db
+
+# Audio Configuration
+AUDIO_OUTPUT_DIR=audio_outputs
+MAX_AUDIO_DURATION=300  # seconds
+
+# Server Configuration
+HOST=0.0.0.0
+PORT=8000
+DEBUG=True
+
+# Logging Configuration
+LOG_LEVEL=INFO
